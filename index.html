@@ -71,6 +71,11 @@
   .alt{background:var(--cream-2)}
   .dress .value{font-family:var(--f-serif);font-size:1.8rem;color:var(--accent);letter-spacing:.06em}
   .insta .handle{font-family:var(--f-script);font-size:3rem;color:var(--accent)}
+  .small-note{font-family:var(--f-serif);font-style:italic;font-size:1.1rem;color:var(--ink-soft);margin-top:6px}
+  .alias{font-family:var(--f-script);font-size:3rem;color:var(--accent);text-decoration:none;display:inline-block;margin-top:10px}
+  .alias:hover{opacity:.8}
+  .forms-wrap{max-width:520px;margin:18px auto 0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+  .forms-wrap iframe{display:block;width:100%;border:0}
 
   /* Reproductor flotante Spotify (abajo a la izquierda, fijo) */
   #spotify-float{position:fixed;bottom:12px;left:12px;z-index:999;width:min(320px,64vw);
@@ -122,7 +127,6 @@
   <section class="countdown">
     <div class="container reveal">
       <div class="cd-label">Faltan</div>
-      <div class="cd-today" id="cd-today"></div>
       <div class="cd-grid">
         <div class="cd-box"><div class="cd-num" id="cd-days">00</div><div class="cd-unit">Días</div></div>
         <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-unit">Horas</div></div>
@@ -140,14 +144,14 @@
       <div class="divider"></div>
       <div class="info-block">
         <div class="big">Domingo 11 de Octubre</div>
-        <div class="sub">De 20:00 a 02:00</div>
+        <div class="sub">De 20:00 a 02:00 hs</div>
       </div>
       <div class="info-block">
-        <div class="big">Echagüe Catering</div>
+        <div class="big">Espacio Echagüe</div>
         <div class="sub">El Palenque · La Lonja</div>
       </div>
       <p class="lead">Tocá el botón y vas a encontrar cómo llegar. ¡Nos vemos! 😉</p>
-      <a class="btn" href="https://maps.google.com/?q=Echag%C3%BCe+Catering+La+Lonja" target="_blank" rel="noopener">Cómo llegar</a>
+      <a class="btn" href="https://maps.google.com/?q=Espacio+Echag%C3%BCe+La+Lonja" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
   </section>
 
@@ -182,14 +186,34 @@
     </div>
   </section>
 
-  <!-- REGALO -->
+  <!-- ¿QUÉ TEMA NO PUEDE FALTAR? -->
   <section>
+    <div class="container reveal">
+      <div class="flower">✿</div>
+      <h3 class="sec">¿Qué tema no puede faltar?</h3>
+      <p class="small-note">... así se lo pedimos al DJ 😉</p>
+      <div class="divider"></div>
+      <!-- ============ GOOGLE FORMS (campo abierto) ============
+           Reemplazá la URL del src por la de tu formulario:
+           En Google Forms: Enviar > icono < > (Insertar) > copiá el enlace del src.
+           Queda algo como: https://docs.google.com/forms/d/e/XXXXXXXX/viewform?embedded=true
+      -->
+      <div class="forms-wrap">
+        <iframe src="URL_DE_TU_GOOGLE_FORMS?embedded=true"
+                height="480" width="100%" frameborder="0"
+                marginheight="0" marginwidth="0" loading="lazy">Cargando…</iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGALO -->
+  <section class="alt">
     <div class="container reveal">
       <div class="flower">✿</div>
       <h3 class="sec">Hacer un Regalo</h3>
       <div class="divider"></div>
-      <p class="lead">Si querés tener un detalle conmigo, acá te dejo la info. ¡Lo importante es que vengas!</p>
-      <a class="btn" href="LINK_REGALO" target="_blank" rel="noopener">Ver más</a>
+      <p class="lead">El mejor regalo es que estés presente, pero si querés dejarme uno, este es mi alias</p>
+      <a class="alias" href="https://www.mercadopago.com.ar" target="_blank" rel="noopener">sofi.merens</a>
     </div>
   </section>
 
@@ -208,9 +232,7 @@
   const pad = n => String(n).padStart(2,'0');
   function tick(){
     const now = new Date(); let diff = eventDate - now;
-    const t = document.getElementById('cd-today');
-    if(diff<=0){ t.textContent='¡Es hoy!'; ['cd-days','cd-hours','cd-min','cd-sec'].forEach(i=>document.getElementById(i).textContent='00'); return; }
-    t.textContent = dias[eventDate.getDay()]+' '+eventDate.getDate()+' de '+meses[eventDate.getMonth()];
+    if(diff<=0){ ['cd-days','cd-hours','cd-min','cd-sec'].forEach(i=>document.getElementById(i).textContent='00'); return; }
     const d=Math.floor(diff/86400000);diff-=d*86400000;
     const h=Math.floor(diff/3600000);diff-=h*3600000;
     const m=Math.floor(diff/60000);diff-=m*60000;
